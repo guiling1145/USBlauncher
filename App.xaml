@@ -1,0 +1,122 @@
+﻿<Application x:Class="WpfApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfApp"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- 全局主题色与控件样式，可根据需要扩展 -->
+            <SolidColorBrush x:Key="PrimaryColor" Color="#2563eb"/>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Padding" Value="8,2"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+                <Setter Property="Background" Value="#F3F6FC"/>
+                <Setter Property="Foreground" Value="#222"/>
+                <Setter Property="BorderBrush" Value="#D0D5DD"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="2" ShadowDepth="0" Opacity="0.04"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="12"
+                                    SnapsToDevicePixels="True">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#E0E7EF"/>
+                        <Setter Property="BorderBrush" Value="#B6B9C5"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#D1D6DE"/>
+                        <Setter Property="BorderBrush" Value="#A0A3B0"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#F3F6FC"/>
+                        <Setter Property="Foreground" Value="#AAA"/>
+                        <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="Win11CommandButton" TargetType="Button" BasedOn="{x:Null}">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Padding" Value="8,2"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+                <Setter Property="Background" Value="#F3F6FC"/>
+                <Setter Property="Foreground" Value="#222"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="2" ShadowDepth="0" Opacity="0.04"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="12"
+                                    SnapsToDevicePixels="True">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#e8f0fe"/>
+                        <Setter Property="Foreground" Value="#2563eb"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#dbeafe"/>
+                        <Setter Property="Foreground" Value="#2563eb"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#F3F6FC"/>
+                        <Setter Property="Foreground" Value="#AAA"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="ContextMenu">
+                <Setter Property="Background" Value="#FFF"/>
+                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="2"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ContextMenu">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="10"
+                                    SnapsToDevicePixels="True"
+                                    Padding="{TemplateBinding Padding}">
+                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,80 @@
+﻿<fluent:RibbonWindow x:Class="WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
+        mc:Ignorable="d"
+        Title="USB Launcher" Height="600" Width="900"
+        Background="#F3F3F3">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="24,16,0,8">
+            <TextBlock x:Name="TitleTextBlock" Text="USB应用启动器" FontSize="28" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Button x:Name="AddButton" Content="添加" Width="80" Height="32" Margin="24,0,0,0" Click="AddButton_Click" Style="{StaticResource Win11CommandButton}"/>
+            <Button x:Name="RefreshButton" Content="刷新" Width="80" Height="32" Margin="12,0,0,0" Click="RefreshButton_Click" Style="{StaticResource Win11CommandButton}"/>
+            <Button x:Name="SelectAllButton" Content="全选" Width="80" Height="32" Margin="12,0,0,0" Click="SelectAllButton_Click" Style="{StaticResource Win11CommandButton}"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Margin="24" Background="Transparent">
+            <Border x:Name="ExeListBorder" CornerRadius="24" Background="#CCF3F6FC" Effect="{DynamicResource MicaEffect}">
+                <ListView x:Name="ExeListView" SelectionMode="Extended" 
+                          MouseDoubleClick="ExeListView_MouseDoubleClick"
+                          PreviewMouseLeftButtonDown="ExeListView_PreviewMouseLeftButtonDown"
+                          PreviewMouseRightButtonUp="ExeListView_PreviewMouseRightButtonUp"
+                          Background="Transparent" BorderThickness="0">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Margin" Value="12"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="SnapsToDevicePixels" Value="True"/>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="6" ShadowDepth="0" Opacity="0.10"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <EventSetter Event="PreviewMouseRightButtonDown" Handler="ListViewItem_PreviewMouseRightButtonDown"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource AccentColorBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource AccentColorBrush3}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border x:Name="ExeItemBorder" CornerRadius="12" Background="White" Width="120" Height="120" Padding="0" BorderThickness="0">
+                                <StackPanel x:Name="ExeItemStackPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" >
+                                    <Border x:Name="ExeIconBorder" Width="36" Height="36" Background="#F3F6FC" CornerRadius="8" Margin="0,16,0,8" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0">
+                                        <Image x:Name="ExeIconImage" Source="{Binding Icon}" Width="28" Height="28" Stretch="Uniform"/>
+                                    </Border>
+                                    <TextBlock x:Name="ExeNameTextBlock" Text="{Binding Name}" FontWeight="SemiBold" FontSize="13" TextAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,0,2"/>
+                                    <TextBlock x:Name="ExePathTextBlock" Text="{Binding Path}" FontSize="9" Foreground="#888" TextAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+            <TextBlock x:Name="EmptyHint" Text="未检测到可用的应用程序" 
+                       Foreground="#888" FontSize="18" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <TextBlock x:Name="LoadingHint" Text="正在加载，请稍候..." 
+                       Foreground="#888" FontSize="18" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</fluent:RibbonWindow>
